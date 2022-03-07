@@ -1,18 +1,22 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import consultarDatosAction from '../redux/action/consultarDatosAction';
 import '../styles/formulario.css';
 
 
 const Formulario = () => {
-	const [categorias, guardarCategorias] = useState([]);
-
+	const dispatch = useDispatch();
 	useEffect(() =>{
-		const obtenerCategorias = async () =>{
-			const url = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list`);
-			guardarCategorias(url.data.drinks);
+		const obtenerDato = () =>{
+			dispatch(consultarDatosAction())
 		}
-		obtenerCategorias();
+		obtenerDato();
+		
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
+
+	const {categorias} = useSelector((state) =>(state.categorias))
+	console.log(categorias);
 
 	return (
 		<form className='formulario'>
@@ -25,6 +29,10 @@ const Formulario = () => {
 			<div>
 				<select name="categoria" id="">
 					<option value="">- Selecciona Categoria -</option>
+					{categorias.map(categoria => (
+						<option key={categoria.strCategory}
+						value={categoria.strCategory}>{categoria.strCategory}</option>
+					))}
 				</select>
 			</div>
 
