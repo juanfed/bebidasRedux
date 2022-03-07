@@ -11,6 +11,7 @@ function App() {
         <h1>Recetas de Bebidas</h1>
         <Formulario />
       </div>
+
     </Provider>
   );
 }
