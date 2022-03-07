@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import consultarDatosAction from '../redux/action/consultarDatosAction';
 import '../styles/formulario.css';
+import '../styles/recetas.css';
 
 
 const Formulario = () => {
@@ -92,7 +93,9 @@ const Formulario = () => {
 						<div className='card' 
 						key={receta.idDrink}>
 							<h4>{receta.strDrink}</h4>
-							<img src={receta.strDrinkThumb} alt={receta.strDrink} />
+							<figure className='figure'>
+								<img src={receta.strDrinkThumb} alt={receta.strDrink} />
+							</figure>
 							<button>Ver Receta</button>
 							</div>
 					))}
